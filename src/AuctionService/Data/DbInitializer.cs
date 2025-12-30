@@ -27,7 +27,6 @@ public class DbInitializer
             // 1 Ford GT
             new()
             {
-                Id = 1,
                 Status = Status.Live,
                 ReservePrice = 20000,
                 Seller = "bob",
@@ -45,7 +44,6 @@ public class DbInitializer
             // 2 Bugatti Veyron
             new()
             {
-                Id = 2,
                 Status = Status.Live,
                 ReservePrice = 90000,
                 Seller = "alice",
@@ -63,7 +61,6 @@ public class DbInitializer
             // 3 Ford mustang
             new()
             {
-                Id = 3,
                 Status = Status.Live,
                 Seller = "bob",
                 AuctionEnd = DateTime.UtcNow.AddDays(4),
@@ -80,7 +77,6 @@ public class DbInitializer
             // 4 Mercedes SLK
             new()
             {
-                Id = 4,
                 Status = Status.ReserveNotMet,
                 ReservePrice = 50000,
                 Seller = "tom",
@@ -98,7 +94,6 @@ public class DbInitializer
             // 5 BMW X1
             new()
             {
-                Id = 5,
                 Status = Status.Live,
                 ReservePrice = 20000,
                 Seller = "alice",
@@ -116,7 +111,6 @@ public class DbInitializer
             // 6 Ferrari spider
             new()
             {
-                Id = 6,
                 Status = Status.Live,
                 ReservePrice = 20000,
                 Seller = "bob",
@@ -134,7 +128,6 @@ public class DbInitializer
             // 7 Ferrari F-430
             new()
             {
-                Id = 7,
                 Status = Status.Live,
                 ReservePrice = 150000,
                 Seller = "alice",
@@ -152,7 +145,6 @@ public class DbInitializer
             // 8 Audi R8
             new()
             {
-                Id = 8,
                 Status = Status.Live,
                 Seller = "bob",
                 AuctionEnd = DateTime.UtcNow.AddDays(19),
@@ -169,7 +161,6 @@ public class DbInitializer
             // 9 Audi TT
             new()
             {
-                Id = 9,
                 Status = Status.Live,
                 ReservePrice = 20000,
                 Seller = "tom",
@@ -187,7 +178,6 @@ public class DbInitializer
             // 10 Ford Model T
             new()
             {
-                Id = 10,
                 Status = Status.Live,
                 ReservePrice = 20000,
                 Seller = "bob",
