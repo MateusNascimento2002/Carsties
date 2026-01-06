@@ -21,8 +21,8 @@ public class AuctionsController(AuctionDbContext context, IMapper mapper) : Cont
         return Ok(dto);
     }
 
-    [HttpGet("{id:int}")]
-    public async Task<IActionResult> GetAuctionById(int id)
+    [HttpGet("{id:long}")]
+    public async Task<IActionResult> GetAuctionById(long id)
     {
         var auction = await context.Auctions
             .Include(x => x.Item)
@@ -45,5 +45,39 @@ public class AuctionsController(AuctionDbContext context, IMapper mapper) : Cont
         if (!result) return BadRequest("Something went wrong when saving the auction.");
         var dto = mapper.Map<AuctionDto>(auction);
         return CreatedAtAction(nameof(GetAuctionById), new { dto.Id }, dto);
+    }
+
+    [HttpPut("{id:long}")]
+    public async Task<IActionResult> UpdateAuction(long id, [FromBody] UpdateAuctionDto updateAuctionDto)
+    {
+        var auction = await context.Auctions
+            .Include(x => x.Item)
+            .FirstOrDefaultAsync(x => x.Id == id);
+        if (auction == null) return NotFound();
+        // TODO: check seller == username
+        auction.Item.Make = updateAuctionDto.Make ?? auction.Item.Make;
+        auction.Item.Model = updateAuctionDto.Model ?? auction.Item.Model;
+        auction.Item.Color = updateAuctionDto.Color ?? auction.Item.Color;
+        auction.Item.Mileage = updateAuctionDto.Mileage ?? auction.Item.Mileage;
+        auction.Item.Year = updateAuctionDto.Year ?? auction.Item.Year;
+        var result = await context.SaveChangesAsync() > 0;
+
+        if (result) return NoContent();
+
+        return BadRequest("Something went wrong when saving the auction.");
+    }
+
+    [HttpDelete("{id:long}")] // Will be removed later
+    public async Task<IActionResult> DeleteAuction(long id)
+    {
+        var auction = await context.Auctions.FindAsync(id);
+        if (auction == null) return NotFound();
+        // TODO: check seller == username
+        context.Auctions.Remove(auction);
+        var result = await context.SaveChangesAsync() > 0;
+
+        if (result) return NoContent();
+
+        return BadRequest("Something went wrong when removing the auction.");
     }
 }
